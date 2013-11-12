@@ -1,0 +1,50 @@
+<% if poll_session %>
+
+<h1>Listing poll</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @poll.poll_title %></td>
+        <td><%= @poll.description %></td>
+        <td><%= @poll.category.category_title %></td>
+      </tr>
+  </tbody>
+</table>
+
+<br>
+
+	<% if cookies["poll-" + @poll.code] == @poll.code %>
+	
+		<p>You cannot comment on your own poll.</p>
+		
+	<% else %>
+	
+		<% if !cookies["comment-" + @poll.code] %>
+
+		<%= render 'comments/form' %>
+
+		<% else %>
+
+		<p>You already commented on this poll.</p>
+
+		<% end %>
+		
+	<% end %>
+
+<% else %>
+
+<%= render 'auth_poll' %>
+
+<% end %>

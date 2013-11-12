@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  category: 
+  code: MyString
+  key_admin_hash: 1
+  key_admin_salt: 1
+  key_user_hash: 1
+  key_user_salt: 1
+  pageviews: 1
+
+two:
+  name: MyString
+  description: MyText
+  category: 
+  code: MyString
+  key_admin_hash: 1
+  key_admin_salt: 1
+  key_user_hash: 1
+  key_user_salt: 1
+  pageviews: 1

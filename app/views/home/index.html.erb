@@ -1,0 +1,32 @@
+
+
+<p>Step 1</p>
+<% if !cookies["last_poll"] %>
+
+	<p>Create a poll</p>
+
+	<%= render 'polls/form' %>
+
+<% else %>
+
+	<p>Poll created</p>
+	<p>Visit <a href="/<%= cookies["last_poll"] %>">here</a></p>
+
+	<p>Step 2</p>
+	<p>Send to friends</p>
+	<form action="/mail_friends" method="post">
+	<input type="hidden" name="mail_friends[poll_code]" value="<%= cookies["last_poll"] %>">
+	<textarea name="mail_friends[email_list]" placeholder="john@doe.de, doe@john.de, johndoe@nil.de, ..."></textarea><br/>
+	<input type="submit" value="Send to friends">
+	</form>
+	
+	<% if cookies["mailed-" + cookies["last_poll"]] %>
+		<p>Step 3</p>
+		<p>Check results <a href="/<%= cookies["last_poll"] %>/admin">here</a></p>
+
+		<p>Step 4</p>
+		<p>Repeat it and create a <a href="/new_poll">new poll</a></p>
+
+	<% end %>
+
+<% end %>
