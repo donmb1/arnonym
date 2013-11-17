@@ -40,6 +40,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to "/"+ @poll.code, notice: 'Comment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @comment }
       else
+        params['h'] = @poll.key_user_hash
         format.html { render '/polls/index' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
