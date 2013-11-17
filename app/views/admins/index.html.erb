@@ -1,1 +1,31 @@
-Ich bin der admin von <%= @poll.poll_title %>.
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+		
+		<div class="well">
+
+	<% if admin_session %>		
+		<% if admin_session.code == params[:code] %>
+
+			<%= render 'admins/main_admin'%>
+	
+		<% else %>
+	
+			<%= render 'admins/auth_admin' %>
+		
+		<% end %>
+	<% elsif !@poll.key_admin_hash %>
+
+		<%= render 'admins/main_admin'%>
+		
+	<% else %>
+	
+		<%= render 'admins/auth_admin' %>
+	
+	<% end %>
+
+
+		</div><!-- end well -->
+		</div>
+	</div>
+</div>

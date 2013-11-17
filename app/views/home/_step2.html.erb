@@ -1,0 +1,28 @@
+<p>URL of your poll:</p>
+<p><input type="text" class="form-control" value="www.pollify.de/<%= cookies["last_poll"] %>" onclick="this.select();"></p>
+
+
+<h2>Send to friends</h2>
+<p>Note: We will not store any of those email addresses in our database! Nor will we use them to bug your friends!</p>
+<p>You can add a maximum of 20 email adresses.</p>
+<form action="/mail_friends" method="post">
+<input type="hidden" name="mail_friends[poll_code]" value="<%= cookies["last_poll"] %>" class="form-control">
+
+<div class="row">
+	<div class="col-md-10">
+		<div class="input-group"><span class="input-group-addon">@</span><input type="text" placeholder="jonny@pollify.de" class="form-control" name="mail_friends[email][0]"></div>
+	</div>
+</div>
+
+<div id="email_fields"></div>
+<input type="button" value="More" class="add btn btn-xs" id="add" />
+
+<input type="submit" value="Send to friends" class="btn btn-lg btn-success btn-create-form btn-square">
+</form>
+<p class="skip_link">
+<form name="skip" action="/mail_friends" method="post">
+<input type="hidden" name="mail_friends[poll_code]" value="<%= cookies["last_poll"] %>" class="form-control">
+<input type="hidden" name="mail_friends[skip_mailing]" value="true" class="form-control">
+<a href="#" onclick="skip.submit();">Skip that, I can send them the link manually.</a>
+</form>
+</p>

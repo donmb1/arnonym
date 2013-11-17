@@ -1,0 +1,23 @@
+	<h1><%= @poll.poll_title %></h1>
+
+	<p><%= @poll.description %></p>
+	<p><b>Category:</b> <%= @poll.category.category_title %></p>
+
+		<% if cookies["arnonym-poll-" + @poll.code] == @poll.code %>
+
+			<p>You cannot comment on your own poll.</p>
+
+		<% else %>
+
+			<% if !cookies["comment-" + @poll.code] %>
+
+			<%= render 'polls/comment_form' %>
+
+			<% else %>
+
+			<p>We have received your comment and rating anonymously. Thank you!</p>
+			<p>You cannot comment anymore on this poll.</p>
+
+			<% end %>
+
+		<% end %>

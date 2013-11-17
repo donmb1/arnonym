@@ -1,0 +1,63 @@
+<h1>I am Admin!</h2>
+<h3><%= @poll.poll_title %></h3>
+
+<div class="row">
+	<div class="col-md-6">
+		<p><b>Poll description:</b></p>
+		<p><%= @poll.description %></p>
+	</div>
+	<div class="col-md-6">
+		<% if @poll.email != "" %>
+		<div class="row">
+			<div class="col-md-12">
+				<p><span class="label label-warning">Note</span> You will receive email notifications if somebody comments.<br/>
+				Email entered: <%= @poll.email %></p>
+			</div>
+		</div>
+		<% else %>
+		<div class="row">
+			<div class="col-md-12">
+				<p><span class="label label-danger">Note</span> You will not receive email notifications because no email address was provided.</p>
+			</div>
+		</div>
+		<% end %>
+		<div class="row">
+			<div class="col-md-9">
+				<p>Number of comments and ratings:</p>
+			</div>
+			<div class="col-md-3">
+				<span class="label label-big label-primary"><% if @comments.exists? %><%= @comments.count %><% else %>0<% end %></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
+				<p>Your average rating is:</p>
+			</div>
+			<div class="col-md-3">
+				<span class="label label-big label-primary"><% if @comments.exists? %><%= @comments.average(:rating).round(1) %> / 5<% else %>0<% end %></span>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<p><b>You've received the following comments and ratings on this poll:</b></p>
+
+<% if @comments.exists? %>
+	<% @comments.each do |comment| %>
+	
+	<div class="thumbnail">
+	<h4>Received <%= comment.created_at.to_formatted_s(:long_ordinal) %></h4>
+	<p><b>Rating:</b> <%= comment.rating %> / 5</p>
+	<p><b>Comment:</b></p>
+	<p><%= comment.comment %></p>
+	</div>
+
+	<% end %>
+<% else %>
+	<p>No comments available.</p>
+<% end %>
+
+<hr>
+
+<%= link_to 'Delete this poll!', @poll, method: :delete, data: { confirm: 'Do you really want to permanently delete this poll?' }, :class => "btn btn-xs btn-warning" %>

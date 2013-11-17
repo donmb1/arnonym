@@ -77,4 +77,16 @@ Arnonym::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  
+  # action mailer
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'email-smtp.us-east-1.amazonaws.com',
+    port:                 587,
+    domain:               'pollify.herokuapp.com',
+    user_name:            'AKIAIYWJSDUUWNOYCCRQ',
+    password:             'AhGpT0IS7K2hmne2zXywqgFsv15XFer8pGyRXcUSWlYe',
+    authentication:       'login',
+    enable_starttls_auto: true  }
 end

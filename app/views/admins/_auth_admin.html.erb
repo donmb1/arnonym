@@ -1,0 +1,12 @@
+<h1>Log in</h1>
+
+<%= form_tag sessions_path do %>
+  <p>
+    <%= hidden_field_tag :code_admin, params[:code] %>
+  </p>
+  <p>
+    <%= label_tag :password_admin %><br />
+    <%= password_field_tag :password_admin %>
+  </p>
+  <p class="button"><%= submit_tag "Visit Admin" %></p>
+<% end %>

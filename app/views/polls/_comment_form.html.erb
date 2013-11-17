@@ -1,0 +1,35 @@
+<%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="alert alert-danger">
+      <h2><%= pluralize(@comment.errors.count, "error") %> occured:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :poll_id, :value => @poll.id %>
+
+  <p>Your comment and rating will be submitted anonymously. Still, please watch your language! The author of this poll appreciates your feedback.</p>
+
+  <div class="field">
+	
+    <%= f.label :rating %><br>
+    <%= f.radio_button :rating, 1, {:class => "star"} %>
+	<%= f.radio_button :rating, 2, {:class => "star"} %>
+	<%= f.radio_button :rating, 3, {:class => "star"} %>
+	<%= f.radio_button :rating, 4, {:class => "star"} %>
+	<%= f.radio_button :rating, 5, {:class => "star"} %>
+  </div>
+  <br />
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment, :class => "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => "btn btn-success", :value => "Create anonymous comment" %>
+  </div>
+<% end %>

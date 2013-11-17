@@ -7,7 +7,11 @@ Arnonym::Application.routes.draw do
   
   post '/mail_friends' => "mails#mail_friends", :as => "mail_friends"
   get 'new_poll' => "sessions#new_poll", :as => "reset_poll"
+  
+  # logout logic
   get '/logout' => "sessions#destroy", :as => "log_out"
+  get '/logout_admin' => "sessions#destroy_admin", :as => "log_out_admin"
+  
   get '/:code', :controller => :polls, :action => :index
   get '/:code/admin', :controller => :admins, :action => :index
 

@@ -1,32 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Arnonym</title>
+  <title>Pollify - Create anonymous polls</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<!-- navigation -->
+	<nav class="navbar navbar-inverse navbar-square" role="navigation">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+	  <!-- Brand and toggle get grouped for better mobile display -->
+	  <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	      <span class="sr-only">Toggle navigation</span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </button>
+	    <a class="navbar-brand" href="/"><div class="logo">POLLIFY <small class="slogan">anonymous polls</small></div></a>
+	  </div>
 
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-	
-		<% if poll_session %>
-			<p><%= link_to "Log out from Poll", log_out_path %></p>
-		<% end %>
+	  <!-- Collect the nav links, forms, and other content for toggling -->
+	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" role="navigation">
+	    <ul class="nav navbar-nav navbar-right">
+		
+			<li class="dropdown">
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Polls <b class="caret"></b></a>
+			        <ul class="dropdown-menu">
+						<% i = 0 %>
+						<% cookies.each do |cookie| %>
+							
+							<% if cookie[0].include? "arnonym-poll" %>
+							<% i = i + 1 %>
 
-			<% if flash[:notice] %>
-				<div class="alert alert-info">
-					<%= flash[:notice] %>
-				</div>
-			<% end %>
+							<% single_poll = Poll.find_by_code(cookie[1]) %>
+							
+								<% if single_poll %>
+								<li><a href="/<%= cookie[1] %>/admin"><%= single_poll.poll_title %></a></li>
+								<% end %>
+							<% end %>
+						<% end %>
+						
+							<% if i == 0 %>
+								<li><a href="/">Create your first poll now.</a></li>
+							<% end %>
+			          
+			        </ul>
+		  </li>
+		  
 
-		<%= yield %>
-	
+	  </div><!-- /.navbar-collapse -->
 		</div>
-	</div>
-</div>
+		</div>
+		</div>
+	
+	</nav>
+	<!-- end navigation -->
+	
+	<!--
+	<% if flash[:notice] %>
+		<div class="alert alert-info">
+			<%= flash[:notice] %>
+		</div>
+	<% end %>
+	-->
+	
 
+	<%= yield %>
+
+<script>$('.dropdown-toggle').dropdown();</script>
 </body>
 </html>

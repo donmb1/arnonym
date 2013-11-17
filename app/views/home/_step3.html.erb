@@ -1,0 +1,10 @@
+<h1>Are you awesome?</h1>
+<p>Let's hope that! Let me summarise everything for you:</p>
+<p>This is the URL to your poll:</p>
+<p><input type="text" class="form-control" value="www.pollify.de/<%= cookies["last_poll"] %>" onclick="this.select();"></p>
+<p>And here you can check the results:</p>
+<a href="http://www.pollify.de/<%= cookies["last_poll"] %>/admin">www.pollify.de/<%= cookies["last_poll"] %>/admin</a>
+
+<h3>Wanna make another poll?</h3>
+
+<p><a href="/new_poll" class="btn">Click here</a></p>

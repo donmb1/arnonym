@@ -1,0 +1,60 @@
+<%= form_for(@poll) do |f| %>
+  <% if @poll.errors.any? %>
+    <div class="alert alert-danger">
+      <p><%= pluralize(@poll.errors.count, "error") %> occured:</p>
+
+      <ul>
+      <% @poll.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :poll_title %>*<br>
+    <%= f.text_field :poll_title, :class => "form-control", :maxlength => 70 %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>*<br>
+    <%= f.text_area :description, :class => "form-control", :maxlength => 1000 %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %>*<br>
+
+	<%= f.select :category_id, @categories.collect {|p| [ p.category_title, p.id ] }, {:prompt => 'Please make a choice!'}, :class => "form-control" %>
+
+  </div>
+  <hr>
+  <p>Do you want notifications? Please enter your email below:</p>
+  <div class="field">
+    <%= f.label :email %><br>
+	<div class="input-group"><span class="input-group-addon">@</span>
+    <%= f.text_field :email, :class => "form-control", :maxlength => 255 %>
+	</div>
+  </div>
+  <hr>
+  <p>You can protect your poll with a PIN for your users. You can also choose a PIN for administration. We recommend to do that!</p>
+  <div class="field">
+	<div class="row">
+		<div class="col-xs-4">
+    	<%= f.label :key_user %>
+		</div>
+		<div class="col-xs-4">
+    	<%= f.label :key_admin %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4">
+    	<%= f.password_field :key_user, :class => "form-control", :maxlength => 255 %>
+		</div>
+		<div class="col-xs-4">
+    	<%= f.password_field :key_admin, :class => "form-control", :maxlength => 255 %>
+		</div>
+	</div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit :class => "btn btn-lg btn-success btn-create-form btn-square" %>
+  </div>
+<% end %>

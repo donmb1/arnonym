@@ -1,50 +1,41 @@
-<% if poll_session %>
-
-<h1>Listing poll</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Category</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-      <tr>
-        <td><%= @poll.poll_title %></td>
-        <td><%= @poll.description %></td>
-        <td><%= @poll.category.category_title %></td>
-      </tr>
-  </tbody>
-</table>
-
-<br>
-
-	<% if cookies["poll-" + @poll.code] == @poll.code %>
-	
-		<p>You cannot comment on your own poll.</p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
 		
-	<% else %>
-	
-		<% if !cookies["comment-" + @poll.code] %>
+		<div class="well">	
+		
+		<% if @poll %>
+			
+			<% if poll_session %>
+				<% if poll_session.code == @poll.code %>	
 
-		<%= render 'comments/form' %>
+				<%= render 'polls/main_poll'%>
+		
+				<% else %>	
 
+				<%= render 'polls/auth_poll' %>
+
+				<% end %>
+			
+			<% elsif !@poll.key_user_hash %>
+
+			<%= render 'polls/main_poll'%>
+		
+			<% else %>	
+
+			<%= render 'polls/auth_poll' %>
+		
+			<% end %>
+		
 		<% else %>
-
-		<p>You already commented on this poll.</p>
-
+			
+			<p>This poll does not exist. It was either deleted or never created. Sorry!</p>
+			<p><a href="/" class="btn btn-success">Create a poll now!</a></p>
+			
 		<% end %>
 		
-	<% end %>
-
-<% else %>
-
-<%= render 'auth_poll' %>
-
-<% end %>
+		</div><!-- end well -->
+		
+		</div>
+	</div>
+</div>

@@ -5,28 +5,13 @@ class PollsController < ApplicationController
   # GET /polls.json
   def index
     @poll = Poll.find_by_code(params[:code])  
-    @comment = Comment.new
-    
-  end
-
-  # GET /polls/1
-  # GET /polls/1.json
-  def show
-  end
-
-  # GET /polls/new
-  def new
-    @poll = Poll.new
-    @categories = Category.all
-  end
-
-  # GET /polls/1/edit
-  def edit
+    @comment = Comment.new  
   end
 
   # POST /polls
   # POST /polls.json
   def create
+    
     
     # create random hash as page URL
     length = 7
@@ -50,18 +35,26 @@ class PollsController < ApplicationController
         cookies["last_poll"] = params[:poll][:code]
         
         # record all created polls to not forget them
-        cookies["poll-" + @poll.code] = params[:poll][:code]
+        cookies["arnonym-poll-" + @poll.code] = params[:poll][:code]
         
-        # auto login to last created poll
-        poll_auth = Poll.authenticate(params[:poll][:code], params[:poll][:key_user])
-        if poll_auth
-          session[:code] = params[:poll][:code]
+        # deliver email if email was provided
+        if @poll.email != ""
+          @admin_notification = UserNotification.notify_admin(@poll.email, @poll.code).deliver
+        end
+        
+        # auto login to last created poll - if pin was entered
+        if params[:poll][:key_user].present?
+          poll_auth = Poll.authenticate(params[:poll][:code], params[:poll][:key_user])
+          if poll_auth
+            session[:code] = params[:poll][:code]
+          end
         end
         
         format.html { redirect_to root_url, notice: 'Poll was successfully created.' }
         format.json { render action: 'show', status: :created, location: @poll }
       else
-        format.html { render action: 'new' }
+        @categories = Category.all
+        format.html { render '/home/index' }
         format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end
@@ -99,6 +92,6 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:poll_title, :description, :category_id, :code, :key_admin_hash, :key_admin_salt, :key_user_hash, :key_user_salt, :pageviews)
+      params.require(:poll).permit(:poll_title, :description, :category_id, :code, :key_admin_hash, :key_admin_salt, :key_user_hash, :key_user_salt, :pageviews, :email)
     end
 end

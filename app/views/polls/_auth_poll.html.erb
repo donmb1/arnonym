@@ -1,4 +1,6 @@
-<h1>Log in</h1>
+<h1>Visit this poll!</h1>
+
+<p>Please enter the password that was provided to you.</p>
 
 <%= form_tag sessions_path do %>
   <p>
@@ -8,5 +10,5 @@
     <%= label_tag :password %><br />
     <%= password_field_tag :password %>
   </p>
-  <p class="button"><%= submit_tag "Visit Poll" %></p>
+  <p class="button"><%= submit_tag "Visit Poll", :class => "btn btn-success" %></p>
 <% end %>

@@ -8,7 +8,12 @@ class ApplicationController < ActionController::Base
   def poll_session
     @poll_session ||= Poll.find_by_code(session[:code]) if session[:code]
   end
+  
+  def admin_session
+    @admin_session ||= Poll.find_by_code(session[:code_admin]) if session[:code_admin]
+  end
 
   helper_method :poll_session
+  helper_method :admin_session
   
 end

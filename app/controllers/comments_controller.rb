@@ -32,10 +32,15 @@ class CommentsController < ApplicationController
         
         cookies["comment-" + @poll.code] = @poll.code
         
+        # deliver email to admin if email was provided
+        if @poll.email != ""
+          @admin_notification = UserNotification.notify_admin_of_comment(@poll.email, @poll.code).deliver
+        end
+        
         format.html { redirect_to "/"+ @poll.code, notice: 'Comment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @comment }
       else
-        format.html { render action: 'new' }
+        format.html { render '/polls/index' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
