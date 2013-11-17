@@ -1,7 +1,7 @@
 <%= form_for(@comment) do |f| %>
   <% if @comment.errors.any? %>
-    <div id="alert alert-danger">
-      <h2><%= pluralize(@comment.errors.count, "error") %> occured:</h2>
+    <div class="alert alert-danger">
+      <p><%= pluralize(@comment.errors.count, "error") %> occured:</p>
 
       <ul>
       <% @comment.errors.full_messages.each do |msg| %>
