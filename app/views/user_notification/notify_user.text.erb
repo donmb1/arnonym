@@ -1,3 +1,17 @@
-Hi
+Dear POLLIFY user,
 
-This is an email. <%= @code %>
+You receive this email because someone has invited you to the poll with the name <%= @poll.poll_title %>.
+You are asked to comment on this poll anonymously.
+
+Note: We have not saved your email address in our database. Your rating will be 100% anonymous.
+
+Visit this URL
+ http://www.pollify.de/<%= @code %><% if @poll.key_user_hash %>?h=<%= @poll.key_user_hash %><% end %>
+to access the poll.
+
+You can also enter if via
+ http://www.pollify.de/<%= @code %>
+if the password has been provided to you.
+
+All the best,
+the POLLIFY team

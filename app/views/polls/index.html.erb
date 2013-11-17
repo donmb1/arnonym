@@ -21,6 +21,10 @@
 
 			<%= render 'polls/main_poll'%>
 		
+			<% elsif params['h'] == @poll.key_user_hash %>
+			
+			<%= render 'polls/main_poll' %>
+			
 			<% else %>	
 
 			<%= render 'polls/auth_poll' %>
