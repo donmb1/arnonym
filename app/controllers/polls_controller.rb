@@ -49,6 +49,12 @@ class PollsController < ApplicationController
             session[:code] = params[:poll][:code]
           end
         end
+        if params[:poll][:key_admin].present?
+          poll_auth = Poll.authenticate_admin(params[:poll][:code], params[:poll][:key_admin])
+          if poll_auth
+            session[:code_admin] = params[:poll][:code]
+          end
+        end
         
         format.html { redirect_to root_url, notice: 'Poll was successfully created.' }
         format.json { render action: 'show', status: :created, location: @poll }

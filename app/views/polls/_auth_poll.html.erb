@@ -1,14 +1,24 @@
 <h1>Visit this poll!</h1>
 
-<p>Please enter the password that was provided to you.</p>
+<p>Please enter the <b>password</b> that was provided to you.</p>
+
+
+<% if flash[:notice] %>
+	<div class="alert alert-danger">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
 
 <%= form_tag sessions_path do %>
-  <p>
     <%= hidden_field_tag :code, params[:code] %>
-  </p>
-  <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p class="button"><%= submit_tag "Visit Poll", :class => "btn btn-success" %></p>
+
+<div class="row">
+	<div class="col-md-2">
+    <%= password_field_tag :password, "", :class => "form-control" %>
+	</div>
+	<div class="col-md-6">
+	<%= submit_tag "Visit Poll", :class => "btn btn-success" %>
+	</div>
+</div>
 <% end %>

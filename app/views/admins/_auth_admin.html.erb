@@ -1,12 +1,21 @@
-<h1>Log in</h1>
+<h1>Log in to the Poll Administration</h1>
+
+<p>Please enter your <b>password</b>.</p>
+
+<% if flash[:notice] %>
+	<div class="alert alert-danger">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
 
 <%= form_tag sessions_path do %>
-  <p>
+<div class="row">
+	<div class="col-md-2">
     <%= hidden_field_tag :code_admin, params[:code] %>
-  </p>
-  <p>
-    <%= label_tag :password_admin %><br />
-    <%= password_field_tag :password_admin %>
-  </p>
-  <p class="button"><%= submit_tag "Visit Admin" %></p>
+    <%= password_field_tag :password_admin, "", :class => "form-control" %>
+	</div>
+	<div class="col-md-6">
+  	<%= submit_tag "Visit Poll Admin", :class => "btn btn-success" %>
+	</div>
+</div>
 <% end %>
