@@ -36,8 +36,12 @@ class CommentsController < ApplicationController
         if @poll.email != ""
           @admin_notification = UserNotification.notify_admin_of_comment(@poll.email, @poll.code).deliver
         end
-
-        format.html { redirect_to "/"+ @poll.code + "?h=" + Digest::MD5.hexdigest(@poll.key_user_hash), notice: 'Comment was successfully created.' }
+        
+        if !@poll.key_user_hash
+          format.html { redirect_to "/"+ @poll.code, notice: 'Comment was successfully created.' }
+        else
+          format.html { redirect_to "/"+ @poll.code + "?h=" + Digest::MD5.hexdigest(@poll.key_user_hash), notice: 'Comment was successfully created.' }
+        end
         format.json { render action: 'show', status: :created, location: @comment }
       else
         # to keep users that came from email alive - send hash as param
