@@ -6,7 +6,7 @@ You are asked to comment on this poll anonymously.
 Note: We have not saved your email address in our database. Your rating will be 100% anonymous.
 
 Visit this URL
- http://www.pollify.de/<%= @code %><% if @poll.key_user_hash %>?h=<%= @poll.key_user_hash %><% end %>
+ http://www.pollify.de/<%= @code %><% if @poll.key_user_hash %>?h=<%= Digest::MD5.hexdigest(@poll.key_user_hash) %><% end %>
 to access the poll.
 
 You can also enter if via

@@ -21,7 +21,7 @@
 
 			<%= render 'polls/main_poll'%>
 		
-			<% elsif params['h'] == @poll.key_user_hash %>
+			<% elsif params['h'] == Digest::MD5.hexdigest(@poll.key_user_hash) %>
 			
 			<%= render 'polls/main_poll' %>
 			
