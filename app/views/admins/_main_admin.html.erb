@@ -55,11 +55,10 @@
 
 	<% end %>
 <% else %>
-	<% if @poll.code != "jzvivqu" %>
 	<p>No comments available.</p>
-	<% end %>
 <% end %>
 
 <hr>
-
+<% if @poll.code != "jzvivqu" %>
 <%= link_to 'Delete this poll!', @poll, method: :delete, data: { confirm: 'Do you really want to permanently delete this poll?' }, :class => "btn btn-xs btn-warning" %>
+<% end %>
