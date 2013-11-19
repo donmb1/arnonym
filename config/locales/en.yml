@@ -1,11 +1,11 @@
 en: 
     activerecord:
       models:
-        poll: "Poll"
+        poll: "Feedback-survey"
       attributes:
         poll:
-          poll_title: "Poll Title"
-          description: "Poll Description"
+          poll_title: "Title of your feedback-survey"
+          description: "Description of your feedback-survey"
           key_user: "User PIN"
           key_admin: "Admin PIN"
           email: "Email"
@@ -21,8 +21,6 @@ en:
                           blank: "cannot be blank."
                       description:
                           blank: "cannot be blank."
-                          taken: "ist bereits vergeben."
-                          invalid: "hat ein falsches Format."
                       key_admin:
                           blank: "cannot be blank."
                           too_short: "cannot be blank and should have at least 4 characters."

@@ -1,13 +1,13 @@
 Dear POLLIFY user,
 
-You receive this email because someone has invited you to the poll with the name <%= @poll.poll_title %>.
-You are asked to comment on this poll anonymously.
+You receive this email because someone has invited you to a feedback-survey with the name <%= @poll.poll_title %>.
+You are asked to comment on this feedback-survey anonymously.
 
 Note: We have not saved your email address in our database. Your rating will be 100% anonymous.
 
 Visit this URL
  http://www.pollify.de/<%= @code %><% if @poll.key_user_hash %>?h=<%= Digest::MD5.hexdigest(@poll.key_user_hash) %><% end %>
-to access the poll.
+to access the feedback-survey.
 
 You can also enter if via
  http://www.pollify.de/<%= @code %>

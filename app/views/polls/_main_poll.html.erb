@@ -5,7 +5,7 @@
 
 		<% if cookies["arnonym-poll-" + @poll.code] == @poll.code %>
 
-			<p>You cannot comment on your own poll.</p>
+			<p>You cannot comment on your own feedback-survey.</p>
 
 		<% else %>
 
@@ -16,7 +16,7 @@
 			<% else %>
 
 			<p>We have received your comment and rating anonymously. Thank you!</p>
-			<p>You cannot comment anymore on this poll.</p>
+			<p>You cannot comment on this feedback-survey anymore.</p>
 
 			<% end %>
 
