@@ -1,5 +1,5 @@
 class UserNotification < ActionMailer::Base
-  default from: "info@owli.de"
+  default from: '"POLLIFY" <info@owli.de>'
   
   def notify_user(email, code)
     @code = code
@@ -12,13 +12,13 @@ class UserNotification < ActionMailer::Base
     @code = code
     @poll = Poll.find_by_code(@code)
     mail(:to => email,
-      :subject => "Your new poll at POLLIFY was created.")
+      :subject => "Your new feedback-survey at POLLIFY was created.")
   end
   
   def notify_admin_of_comment(email, code)
     @code = code
     @poll = Poll.find_by_code(@code)
     mail(:to => email,
-      :subject => "New comment and rating on your POLLIFY poll received.")
+      :subject => "New comment and rating on your POLLIFY feedback-survey received.")
   end
 end
