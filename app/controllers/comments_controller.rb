@@ -45,7 +45,9 @@ class CommentsController < ApplicationController
         format.json { render action: 'show', status: :created, location: @comment }
       else
         # to keep users that came from email alive - send hash as param
-        params['h'] = Digest::MD5.hexdigest(@poll.key_user_hash)
+        if @poll.key_user_hash
+          params['h'] = Digest::MD5.hexdigest(@poll.key_user_hash)
+        end
         
         format.html { render '/polls/index' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
