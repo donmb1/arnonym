@@ -16,4 +16,4 @@
 /tmp
 
 # ignore email settings
-/config/environment/production.rb
+/config/environments/production.rb
